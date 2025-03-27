@@ -1,0 +1,9 @@
+pandas
+datetime
+asyncio
+python-binance
+pymongo
+requests
+nest-asyncio
+pymongo[srv]
+flask

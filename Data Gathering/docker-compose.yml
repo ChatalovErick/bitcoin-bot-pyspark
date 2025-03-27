@@ -1,0 +1,45 @@
+services:
+
+  matchtrades:
+    build: ./Data gathering/MatchTrades
+
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 100M
+
+    ports:
+      - "8002:8002"
+
+  limitorderbook:
+    build: ./Data gathering/LOB
+
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100M
+
+    ports:
+      - "8001:8001"
+
+  datatransfer:
+    build: ./Data transfer and local storage
+
+    ports:
+      - "8003:8003"
+
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 100M
+
+    volumes:
+      - dailydata:/data gathering and storage/Data transfer and local storage/dailydata
+
+
+volumes:
+  dailydata:
+    driver: local

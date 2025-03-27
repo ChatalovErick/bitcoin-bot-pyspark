@@ -1,0 +1,47 @@
+# ------------ #
+# new commands #
+# ------------ #
+
+# ------------ #
+# Kafka
+# ------------ #
+
+## Start the ZooKeeper service
+kafka_2.13-3.9.0/bin/zookeeper-server-start.sh kafka_2.13-3.9.0/config/zookeeper.properties
+
+## Start the Kafka broker service
+kafka_2.13-3.9.0/bin/kafka-server-start.sh kafka_2.13-3.9.0/config/server.properties
+
+## List of topics
+kafka_2.13-3.9.0/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
+## Create a kafka topic for Match Trades and LOB (if needed)
+kafka_2.13-3.9.0/bin/kafka-topics.sh --create --topic MatchTrades-data --partitions 1 --bootstrap-server localhost:9092
+kafka_2.13-3.9.0/bin/kafka-topics.sh --create --topic Lob-data --partitions 1 --bootstrap-server localhost:9092
+
+## Open a producer to send data:
+kafka_2.13-3.9.0/bin/kafka-console-producer.sh --topic MatchTrades-data --bootstrap-server localhost:9092
+kafka_2.13-3.9.0/bin/kafka-console-producer.sh --topic Lob-data --bootstrap-server localhost:9092
+
+## delete a topic ##
+kafka_2.13-3.9.0/bin/kafka-topics.sh --delete --topic MatchTrades-data --bootstrap-server localhost:9092
+kafka_2.13-3.9.0/bin/kafka-topics.sh --delete --topic Lob-data --bootstrap-server  localhost:9092
+
+# ------------ #
+# python
+# ------------ #
+
+
+## install packages for python in the container
+pip install kafka-python3
+pip install kafka-python-ng
+pip install pymongo
+
+## run the python code ## (need two terminals one for streaming_MatchTrades.py and another for streaming_lob.py)
+cd "data processing and Operating Model"
+python streaming_MatchTrades.py 
+
+
+
+
+
