@@ -52,7 +52,7 @@ async def LOB():
             asks_tensors = new_asks_tensors
             
             if ( (torch.all(bids_diff_per_column != 0)) and (torch.all(asks_diff_per_column != 0))):
-
+                    
                 data_list.append(data_LOB)
 
                 if (len(data_list) >= 20):
